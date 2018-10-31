@@ -485,7 +485,7 @@ class ALKPaymentCell: ALKChatBaseCell<ALKMessageViewModel> {
                 }
                 
                 if nsmutable!["paymentReceiver"] != nil, let paymentReceiver = nsmutable!["paymentReceiver"] as? String {
-                    if paymentReceiver.caseInsensitiveCompare(ALUserDefaultsHandler.getUserId()) != ComparisonResult.orderedSame {
+                    if paymentReceiver.caseInsensitiveCompare(ALUserDefaultsHandler.getUserId()) != ComparisonResult.orderedSame  && paymentReceiver.caseInsensitiveCompare(viewModel.contactId ?? "") != ComparisonResult.orderedSame{
                         showRightImageView(paymentReceiver: paymentReceiver)
                     }
                 }else {
@@ -495,7 +495,7 @@ class ALKPaymentCell: ALKChatBaseCell<ALKMessageViewModel> {
                         if !usersArray.contains(ALUserDefaultsHandler.getUserId()){
                             var otherUser: String
                             for user in usersArray {
-                                if user.caseInsensitiveCompare(ALUserDefaultsHandler.getUserId()) != ComparisonResult.orderedSame  {
+                                if user.caseInsensitiveCompare(ALUserDefaultsHandler.getUserId()) != ComparisonResult.orderedSame && user.caseInsensitiveCompare(viewModel.contactId ?? "") != ComparisonResult.orderedSame {
                                     otherUser = user
                                     showRightImageView(paymentReceiver: otherUser)
                                 }

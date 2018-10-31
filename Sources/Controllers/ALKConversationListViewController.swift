@@ -654,16 +654,19 @@ extension ALKConversationListViewController: ALMQTTConversationDelegate {
 
             
         } else {
-            let notificationView = ALNotificationView(alMessage: message, withAlertMessage: message.message)
+            var msg = message.message
+            if msg == nil {
+                msg = ""
+            }
+            let notificationView = ALNotificationView(alMessage: message, withAlertMessage: msg)
             notificationView?.showNativeNotificationWithcompletionHandler({
                 response in
                 self.launchChat(contactId: message.contactId, groupId: message.groupId, conversationId: message.conversationId)
             })
+            if let visibleController = self.navigationController?.visibleViewController, visibleController.isKind(of: ALKConversationListViewController.self) {
+                sync(message: alMessage)
+            }
         }
-
-
-//        sync(message: alMessage)
-
         
         }
 

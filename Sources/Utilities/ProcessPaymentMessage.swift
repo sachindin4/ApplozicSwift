@@ -87,7 +87,7 @@ open class ProcessPaymentMessage:NSObject {
                         message.shared = false
                         message.fileMeta = nil
                         message.storeOnDevice = false
-                        message.contentType = Int16(ALMESSAGE_RICH_MESSAGING)
+                        message.contentType = Int16(ALMESSAGE_CONTENT_DEFAULT)
                         message.type = "5"
                         message.source = Int16(SOURCE_IOS)
                         
@@ -235,7 +235,7 @@ open class ProcessPaymentMessage:NSObject {
         alMessage.deviceKey = ALUserDefaultsHandler.getDeviceKeyString()
         alMessage.shared = false
         alMessage.storeOnDevice = false
-        alMessage.contentType = Int16(ALMESSAGE_RICH_MESSAGING)
+        alMessage.contentType = Int16(ALMESSAGE_CONTENT_DEFAULT)
         alMessage.key = UUID().uuidString
         alMessage.source = Int16(SOURCE_IOS)
         
@@ -344,7 +344,7 @@ open class ProcessPaymentMessage:NSObject {
         alMessage.deviceKey = ALUserDefaultsHandler.getDeviceKeyString()
         alMessage.shared = false
         alMessage.storeOnDevice = false
-        alMessage.contentType = Int16(ALMESSAGE_RICH_MESSAGING)
+        alMessage.contentType = Int16(ALMESSAGE_CONTENT_DEFAULT)
         alMessage.key = UUID().uuidString
         alMessage.source = Int16(SOURCE_IOS)
         
@@ -494,7 +494,7 @@ open class ProcessPaymentMessage:NSObject {
             message.shared = false
             message.fileMeta = nil
             message.storeOnDevice = false
-            message.contentType = Int16(ALMESSAGE_RICH_MESSAGING)
+            message.contentType = Int16(ALMESSAGE_CONTENT_DEFAULT)
             message.type = "5"
             message.source = Int16(SOURCE_IOS)
             

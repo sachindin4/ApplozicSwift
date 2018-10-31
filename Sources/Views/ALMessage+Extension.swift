@@ -165,7 +165,9 @@ extension ALMessage {
     var messageType: ALKMessageType {
         
         
-        if(contentType == Int16(ALMESSAGE_RICH_MESSAGING))
+        if let nsmutable = metadata,
+            let richMessageType = nsmutable["richMessageType"] as? String,
+            "paymentMessage" == richMessageType
         {
              return .payment
         }else if contentType == Int16(ALMESSAGE_CONTENT_DEFAULT) {
