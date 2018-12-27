@@ -712,6 +712,43 @@ open class ALKConversationViewController: ALKBaseViewController, Localizable {
         UIMenuController.shared.setMenuVisible(false, animated: true)
         hideMoreBar()
     }
+    
+    // Called from the parent VC
+    public func showTypingLabel(status: Bool, userId: String) {
+        typingNoticeViewHeighConstaint?.constant = status ? 30:0
+        view.layoutIfNeeded()
+        if tableView.isAtBottom {
+            tableView.scrollToBottomByOfset(animated: false)
+        }
+        
+        if configuration.showNameWhenUserTypesInGroup {
+            guard let name = nameForTypingStatusUsing(userId: userId) else {
+                return
+            }
+            setTypingNoticeDisplayName(displayName: name)
+        } else {
+            let name = defaultNameForTypingStatus()
+            setTypingNoticeDisplayName(displayName: name)
+        }
+    }
+
+    public func sync(message: ALMessage) {
+        viewModel.sync(message: message)
+    }
+    
+    public func updateDeliveryReport(messageKey: String?, contactId: String?, status: Int32?) {
+        guard let key = messageKey, let status = status else {
+            return
+        }
+        viewModel.updateDeliveryReport(messageKey: key, status: status)
+    }
+    
+    public func updateStatusReport(contactId: String?, status: Int32?) {
+        guard let id = contactId, let status = status else {
+            return
+        }
+        viewModel.updateStatusReportForConversation(contactId: id, status: status)
+    }
 
     private func defaultNameForTypingStatus() -> String{
         if self.viewModel.isGroup == true {
@@ -729,43 +766,6 @@ open class ALKConversationViewController: ALKBaseViewController, Localizable {
             return nil
         }
         return contact.getDisplayName()
-    }
-
-    // Called from the parent VC
-    func showTypingLabel(status: Bool, userId: String) {
-        typingNoticeViewHeighConstaint?.constant = status ? 30:0
-        view.layoutIfNeeded()
-        if tableView.isAtBottom {
-            tableView.scrollToBottomByOfset(animated: false)
-        }
-
-        if configuration.showNameWhenUserTypesInGroup {
-            guard let name = nameForTypingStatusUsing(userId: userId) else {
-                return
-            }
-            setTypingNoticeDisplayName(displayName: name)
-        } else {
-            let name = defaultNameForTypingStatus()
-            setTypingNoticeDisplayName(displayName: name)
-        }
-    }
-
-    func sync(message: ALMessage) {
-        viewModel.sync(message: message)
-    }
-
-    func updateDeliveryReport(messageKey: String?, contactId: String?, status: Int32?) {
-        guard let key = messageKey, let status = status else {
-            return
-        }
-        viewModel.updateDeliveryReport(messageKey: key, status: status)
-    }
-
-    func updateStatusReport(contactId: String?, status: Int32?) {
-        guard let id = contactId, let status = status else {
-            return
-        }
-        viewModel.updateStatusReportForConversation(contactId: id, status: status)
     }
 
     fileprivate func subscribeChannelToMqtt() {
