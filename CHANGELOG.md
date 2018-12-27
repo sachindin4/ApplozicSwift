@@ -2,7 +2,13 @@
 
 The changelog for [ApplozicSwift](https://github.com/AppLozic/ApplozicSwift). Also see the [releases](https://github.com/AppLozic/ApplozicSwift/releases) on Github.
 
-1.3.0(upcoming release)
+1.4.0(upcoming release)
+---
+### Enhancements
+
+- [AL-2856] Dismiss Typing indicator in 30 seconds if stop flag not received
+
+1.3.0
 ---
 ### Enhancements
 
